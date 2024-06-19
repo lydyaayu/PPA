@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <title>Document</title>
+    <script>
+        function sign_out() {
+            $.removeCookie("mytoken", { path: "/" });
+            alert("Signed out!");
+            window.location.href = "/login";
+        }
+    </script>
+</head>
+
+<body>
+    Halaman User
+    <a class="button level-item has-text-centered is-sparta is-outlined" aria-label="logout" onclick="sign_out()">
+        Sign Out&nbsp;&nbsp;&nbsp;<span class="icon is-small"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+    </a>
+</body>
+
+</html>
