@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="{{ url_for('static', filename='logo.jpg') }}" type="image/x-icon" />
+        <meta property="og:title" content="Sweeter - the sweetest site" />
+        <meta property="og:description" content="mini project for Web Plus" />
+        <meta property="og:image" content="{{ url_for('static', filename='image.png') }}" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pusat Pengembangan Anak</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+        <style>
+            .bg-purple {
+                background-color: var(--bs-purple) !important;
+            }
+
+            .form-control::placeholder {
+                color: white;
+            }
+
+            .form-container {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .fixed-bottom {
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row flex-nowrap m-0">
+            <!-- Side Nav -->
+            <header class="col-auto col-md-2 p-0">
+                <nav class="min-vh-100 sticky-top bg-body shadow-sm">
+                    <div class="d-flex flex-column align-items-center">
+                        <a href="#" class="mt-3 nav-link">
+                            <img src="./static/logo.jpg" alt="Pic" width="120" class="d-none d-md-block" />
+                        </a>
+                        <ul class="nav flex-column mt-4">
+                            <li class="nav-item">
+                                <a href="./home.html" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                    <i class="bi bi-microsoft"></i>
+                                    <span class="d-none d-md-inline"> Dashboard </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./about.html" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                    <i class="bi bi-people-fill"></i>
+                                    <span class="d-none d-md-inline"> About </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./contact.html" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                    <i class="bi bi-telephone-fill"></i>
+                                    <span class="d-none d-md-inline"> Contact </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url_for('activities') }}" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                    <i class="bi bi-calendar-fill"></i>
+                                    <span class="d-none d-md-inline"> Activities </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    <span class="d-none d-md-inline"> Report </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                    <i class="bi bi-door-open-fill"></i>
+                                    <span class="d-none d-md-inline"> Sign Out </span>
+                                </a>
+                            </li>
+                            <li class="nav-item mt-4">
+                                <a href="#" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                    <i class="bi bi-question-circle-fill"></i>
+                                    <span class="d-none d-md-inline"> Help </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Body -->
+            <div class="col p-0 overflow-hidden bg-light">
+                <div class="py-4 px-3 px-md-5 shadow-sm bg-body">
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="col">
+                            <h1 class="m-0">Child Management</h1>
+                            <p class="mb-lg-0">Welcome, Admin</p>
+                        </div>
+                        <div class="col">
+                            <form class="d-flex align-items-center h-100" role="search">
+                                <input
+                                    class="form-control form-control-lg me-2 bg-body-secondary text-center"
+                                    type="search"
+                                    placeholder="Search content"
+                                    aria-label="Search"
+                                />
+                                <button class="btn btn-lg btn-outline-secondary" type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Inputs -->
+                <div class="py-2 px-3 px-md-5 my-4">
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="form-container">
+                                <form id="childForm">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Enter name" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="class" class="form-label">Class</label>
+                                        <input type="text" class="form-control" id="class" placeholder="Enter class" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="gambar" class="form-label">Gambar</label>
+                                        <input type="file" class="form-control" id="gambar" accept="image/*" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="biodata" class="form-label">Biodata</label>
+                                        <textarea class="form-control" id="biodata" rows="3" placeholder="Enter biodata" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="sponsorship" class="form-label">Sponsorship</label>
+                                        <input type="text" class="form-control" id="sponsorship" placeholder="Enter sponsorship" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="h-100 d-flex flex-column align-items-center">
+                                <img id="profileImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1_eZwqhb-tZRFiM4wLAtsvPIRw3MLhgiRnPjNdbFzEVJf1koBWdNoCbgvndRgnKSvd1c&usqp=CAU" class="img-fluid" alt="Profile Image" width="200" />
+                                <h2 id="displayName">Andi</h2>
+                                <h3 id="displayClass">Kelas 2</h3>
+                                <p id="displayBiodata" style="max-width: 600px">
+                                    Lahir di Jakarta, 13 Agustus 2016
+                                </p>
+                                <p id="displaySponsorship" style="max-width: 600px">
+                                    Sponsorship
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed-bottom d-flex justify-content-end p-3">
+            <a href="{{ url_for('activities') }}" class="btn btn-lg btn-warning bg-gradient fw-bold">Back</a>
+        </div>
+
+        <script>
+            document.getElementById('childForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+        
+                // Mengambil nilai dari formulir
+                const name = document.getElementById('name').value;
+                const className = document.getElementById('class').value;
+                const gambar = document.getElementById('gambar').files[0];
+                const biodata = document.getElementById('biodata').value;
+                const sponsorship = document.getElementById('sponsorship').value;
+        
+                // Memperbarui elemen tampilan dengan data formulir
+                document.getElementById('displayName').innerText = name;
+                document.getElementById('displayClass').innerText = className;
+                document.getElementById('displayBiodata').innerText = biodata;
+                document.getElementById('displaySponsorship').innerText = sponsorship;
+        
+                // Memperbarui gambar profil jika ada file yang dipilih
+                if (gambar) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('profileImage').src = e.target.result;
+                    };
+                    reader.readAsDataURL(gambar);
+                }
+            });
+        </script>
+        
+            

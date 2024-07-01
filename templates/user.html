@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='logo.jpg') }}" type="image/x-icon" />
+    <meta property="og:title" content="Sweeter - the sweetest site" />
+    <meta property="og:description" content="mini project for Web Plus" />
+    <meta property="og:image" content="{{ url_for('static', filename='image.png') }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pusat Pengembangan Anak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+
+    <script src="https://unpkg.com/simple-jscalendar@1.4.5/source/jsCalendar.min.js"
+        integrity="sha384-F3Wc9EgweCL3C58eDn9902kdEH6bTDL9iW2JgwQxJYUIeudwhm4Wu9JhTkKJUtIJ"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/simple-jscalendar@1.4.5/source/jsCalendar.min.css"
+        integrity="sha384-CTBW6RKuDwU/TWFl2qLavDqLuZtBzcGxBXY8WvQ0lShXglO/DsUvGkXza+6QTxs0" crossorigin="anonymous" />
+    <script>
+        function sign_out() {
+            $.removeCookie("mytoken", { path: "/" });
+            alert("Signed out!");
+            window.location.href = "/login";
+        }
+    </script>
+    <style>
+        .bg-purple {
+            background-color: var(--bs-purple) !important;
+        }
+
+        .form-control::placeholder {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row flex-nowrap m-0">
+        <!-- Side Nav -->
+
+        <header class="col-auto col-md-2 p-0">
+            <nav class="min-vh-100 sticky-top bg-body shadow-sm">
+                <div class="d-flex flex-column align-items-center">
+                    <a href="#" class="mt-3 nav-link">
+                        <img src="./static/logo.jpg" alt="Pic" width="120" class="d-none d-md-block" />
+                    </a>
+                    <ul class="nav flex-column mt-4">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                <i class="bi bi-microsoft"></i>
+                                <span class="d-none d-md-inline">
+                                    Dashboard
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/about" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                <i class="bi bi-people-fill"></i>
+                                <span class="d-none d-md-inline">
+                                    About
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('contact') }}"
+                                class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                <i class="bi bi-telephone-fill"></i>
+                                <span class="d-none d-md-inline">
+                                    Contact
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('activities') }}"
+                                class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                <i class="bi bi-calendar-fill"></i>
+                                <span class="d-none d-md-inline">
+                                    Activities
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                <i class="bi bi-exclamation-circle-fill"></i>
+                                <span class="d-none d-md-inline">
+                                    Report
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a onclick="sign_out()"
+                                class="nav-link d-flex align-items-center fw-bolder gap-2 text-body">
+                                <i class="bi bi-door-open-fill"></i>
+                                <span class="d-none d-md-inline">
+                                    Sign Out
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Body -->
+
+        <div class="col p-0 overflow-hidden bg-light">
+            <div class="py-4 px-3 px-md-5 shadow-sm bg-body">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col">
+                        <h1 class="m-0">User Management</h1>
+                        <p class="mb-lg-0">Welcome, username</p>
+                    </div>
+                    <div class="col">
+                        <form class="d-flex align-items-center h-100" role="search">
+                            <input class="form-control form-control-lg me-2 bg-body-secondary text-center" type="search"
+                                placeholder="Search content" aria-label="Search" />
+                            <button class="btn btn-lg btn-outline-secondary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <div class="fixed-bottom d-flex justify-content-end p-3">
+                                <a href="{{ url_for('activities') }}"
+                                    class="btn btn-lg btn-warning bg-gradient fw-bold">
+                                    Back
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="py-2 px-3 px-md-5 my-4">
+                <div class="row row-cols-1 row-cols-lg-3 g-4">
+                    <div class="col col-lg-4">
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex gap-2 p-2 bg-primary bg-gradient bg-opacity-75 rounded">
+                                <input type="text"
+                                    class="form-control bg-transparent form-control-lg border-0 text-white"
+                                    placeholder="Name" />
+                                <button class="btn btn-light" type="button">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            </div>
+                            <div class="d-flex gap-2 p-2 bg-primary bg-gradient bg-opacity-75 rounded">
+                                <input type="text"
+                                    class="form-control bg-transparent form-control-lg border-0 text-white"
+                                    placeholder="Class" />
+                                <button class="btn btn-light" type="button">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            </div>
+                            <div class="d-flex gap-2 p-2 bg-primary bg-gradient bg-opacity-75 rounded">
+                                <input type="text"
+                                    class="form-control bg-transparent form-control-lg border-0 text-white"
+                                    placeholder="Biodata" />
+                                <button class="btn btn-light" type="button">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-lg-8">
+                        <div class="h-100 d-flex flex-column">
+                            <div class="d-flex flex-column align-items-center gap-3">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9-NYUzYsKISu1OsDVKuV0xMZ3QOPgPf57Aw&s"
+                                    class="img-fluid" alt="image" width="200" />
+                                <h2>Bp. Budi</h2>
+                                <h2>Guru : Kelas 2</h2>
+                                <p style="max-width: 600px">
+                                    Bp. Budi adalah seorang guru matematika untuk anak sd dan sederajat
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <a href="{{ url_for('activities') }}" class="btn btn-lg btn-warning bg-gradient fw-bold">
+                Back
+            </a> -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

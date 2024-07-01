@@ -8,6 +8,33 @@ function sign_out() {
 }
 // Kegiatan Hari ini
 $(document).ready(function () {
+    checkAndClearActivities();
+});
+function checkAndClearActivities() {
+    let lastAccessDate = localStorage.getItem('lastAccessDate');
+    let currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+    if (lastAccessDate !== currentDate) {
+        localStorage.setItem('lastAccessDate', currentDate);
+        clearActivities();
+    }
+}
+function clearActivities() {
+    $.ajax({
+        type: "POST",
+        url: "/clear_activities",
+        success: function (response) {
+            alert(response["msg"]);
+            show_act();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error clearing activities:', error);
+            alert('Error clearing activities');
+        }
+    });
+}
+
+$(document).ready(function () {
     show_act();
 });
 function show_act() {
@@ -17,7 +44,7 @@ function show_act() {
         url: "/act",
         data: {},
         success: function (response) {
-            let rows = response['acts']
+            let rows = response['acts'];
             for (let i = 0; i < rows.length; i++) {
                 let act = rows[i]['act'];
                 let num = rows[i]['num'];
@@ -39,11 +66,17 @@ function show_act() {
                         <button onclick="delete_act(${num})" type="button" class="btn btn-danger btn-delete" style="margin-left: 10px;">Hapus</button>
                     </li>
                     `;
-                } $('#act-list').append(temp_html);
+                }
+                $('#act-list').append(temp_html);
             }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching activities:', error);
+            alert('Error fetching activities');
         }
     });
 }
+
 function save_act() {
     let act = $('#act').val();
     $.ajax({
@@ -53,9 +86,14 @@ function save_act() {
         success: function (response) {
             alert(response["msg"]);
             window.location.reload();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error saving activity:', error);
+            alert('Error saving activity');
         }
     });
 }
+
 function done_act(num) {
     $.ajax({
         type: "POST",
@@ -63,9 +101,14 @@ function done_act(num) {
         data: { num_give: num },
         success: function () {
             window.location.reload();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error marking activity as done:', error);
+            alert('Error marking activity as done');
         }
     });
 }
+
 function delete_act(num) {
     $.ajax({
         type: "POST",
@@ -74,6 +117,10 @@ function delete_act(num) {
         success: function (response) {
             alert(response["msg"]);
             show_act();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error deleting activity:', error);
+            alert('Error deleting activity');
         }
     });
 }

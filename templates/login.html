@@ -35,45 +35,30 @@
 
     <script>
         function sign_in() {
-            let username = $("#input-username").val();
-            let password = $("#input-password").val();
-
-            if (username === "") {
-                $("#help-id-login").text("Please input your id.");
-                $("#input-username").focus();
-                return;
-            } else {
-                $("#help-id-login").text("");
-            }
-
-            if (password === "") {
-                $("#help-password").text("Please input your password.");
-                $("#input-password").focus();
-                return;
-            } else {
-                $("#help-password-login").text("");
-            }
-
-
+            let username = $('#input-username').val();
+            let password = $('#input-password').val();
+        
             $.ajax({
-                type: "POST",
-                url: "/sign_in",
+                type: 'POST',
+                url: '/sign_in',
                 data: {
-                    username_give: username,
-                    password_give: password,
+                    'username_give': username,
+                    'password_give': password
                 },
-                success: function (response) {
-                    if (response["result"] === "success") {
-                        let token = response["token"];
-                        $.cookie("mytoken", token, { path: "/" });
-                        alert("Login successful!");
-                        window.location.href = "/";
+                success: function(response) {
+                    if (response['result'] == 'success') {
+                        document.cookie = 'mytoken=' + response['token'] + ';path=/';
+                        window.location.href = '/';
                     } else {
-                        alert(response["msg"]);
+                        alert(response['msg']);
                     }
                 },
+                error: function(response) {
+                    alert('An error occurred. Please try again.');
+                }
             });
         }
+        
 
         function sign_up() {
             let username = $("#input-username").val();
@@ -271,7 +256,7 @@
                             <p id="help-id-login" class="help is-danger" style="font-weight: bold"></p>
                             <select id="role_select" class="form-select is-hidden">
                                 <option selected value="" disabled class="input">Select your role</option>
-                                <option value="normal">User</option>
+                                <option value="normal">Pengajar</option>
                                 <option value="expert">Admin</option>
                             </select>
                             <p id="help_role" class="help is-hidden">
